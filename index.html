@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon" />
+    <title>Clock Cave</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
+
+      body {
+        background: #333333;
+        overflow: hidden;
+      }
+
+      .container {
+        background: #333333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      #txt {
+        font-family: 'Jost';
+        font-size: 12rem;
+        color: #f7de1f;
+        /* color: #FFFAE8; */
+        position: fixed;
+        left: 33%;
+        top: 28%;
+      }
+
+      @media (max-width: 720px) {
+        #txt {
+          font-family: 'Jost';
+          font-size: 5rem;
+          color: #f7de1f;
+          /* color: #FFFAE8; */
+          position: fixed;
+          left: 18%;
+          top: 40%;
+        }
+      }
+    </style>
+  </head>
+
+  <body onload="startTime()">
+    <div class="container">
+      <div class="sub-container"><div id="txt"></div></div>
+    </div>
+    <script>
+      function startTime() {
+        const today = new Date();
+        let h = today.getHours() % 12 || 12;
+        let m = today.getMinutes();
+        let s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML = h + ':' + m + ':' + s;
+        setTimeout(startTime, 1000);
+      }
+
+      function checkTime(i) {
+        if (i < 10) {
+          i = '0' + i;
+        }
+        return i;
+      }
+    </script>
+  </body>
+</html>
