@@ -12,62 +12,63 @@
       body {
         background: #333333;
         overflow: hidden;
-        display: flex;
       }
-
-      .full-screen {
-        cursor: pointer;
+      #subcontainer {
         position: fixed;
-        right: 10px;
-        top: 10px;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
       }
-
-      .timer {
-        position: fixed;
-        left: 33%;
-        top: 33%;
-      }
-
-      #sec {
-        font-family: 'Jost';
-        font-size: 200px;
-        color: #f7de1f;
-      }
-
       #txt {
         font-family: 'Jost';
-        font-size: 200px;
         color: #f7de1f;
+        font-size: 100px;
+        text-align: center;
+        display: inline-block;
+        width: 300px;
       }
 
-      @media (max-width: 1366px) {
-        .timer {
-          position: fixed;
-          left: 30%;
-          top: 35%;
-        }
-        #sec {
-          font-size: 150px;
-        }
-
-        #txt {
-          font-size: 150px;
-        }
+      #time {
+        font-family: 'Jost';
+        color: #f7de1f;
+        font-size: 25px;
+        text-align: right;
+        display: inline-block;
+        width: 130px;
       }
 
       @media (max-width: 720px) {
-        .timer {
+        #subcontainer {
           position: fixed;
-          left: 25%;
-          top: 40%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         }
-        #sec {
-          font-size: 50px;
-        }
-
         #txt {
-          font-size: 50px;
+          font-family: 'Jost';
+          color: #f7de1f;
+          font-size: 64px;
+          text-align: left;
+          display: inline-block;
+          width: 164px;
         }
+        #time {
+          font-family: 'Jost';
+          color: #f7de1f;
+          font-size: 25px;
+          text-align: center;
+          display: inline-block;
+          width: 100%;
+        }
+        .full-screen {
+          display: none;
+        }
+      }
+
+      .full-screen {
+        z-index: 1;
+        cursor: pointer;
+        text-align: right;
       }
     </style>
   </head>
@@ -81,23 +82,22 @@
         onclick="fullscreen()"
       />
     </div>
-
-    <div class="timer">
-      <span id="txt"></span>
-      <span id="sec"></span>
+    <div id="subcontainer">
+      <div id="txt"></div>
+      <div id="time"></div>
     </div>
-
     <script>
       function startTime() {
         const today = new Date();
-        // let h = today.getHours() % 12 || 12;
-        let h = today.getHours();
+        let h = today.getHours() % 12 || 12;
         let m = today.getMinutes();
         let s = today.getSeconds();
+        let t = today.getHours() < 12 ? '\nAM' : '\nPM';
         m = checkTime(m);
         s = checkTime(s);
-        document.getElementById('txt').innerHTML = h + ':' + m + ':';
-        document.getElementById('sec').innerHTML = s;
+
+        document.getElementById('txt').innerHTML = h + ':' + m + ':' + s;
+        document.getElementById('time').innerHTML = t;
         setTimeout(startTime, 1000);
       }
 
