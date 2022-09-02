@@ -12,63 +12,61 @@
       body {
         background: #333333;
         overflow: hidden;
-      }
-      #subcontainer {
-        position: fixed;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-      #txt {
-        font-family: 'Jost';
-        color: #f7de1f;
-        font-size: 100px;
-        text-align: center;
-        display: inline-block;
-        width: 300px;
-      }
-
-      #time {
-        font-family: 'Jost';
-        color: #f7de1f;
-        font-size: 25px;
-        text-align: right;
-        display: inline-block;
-        width: 75px;
-      }
-
-      @media (max-width: 720px) {
-        #subcontainer {
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-        #txt {
-          font-family: 'Jost';
-          color: #f7de1f;
-          font-size: 64px;
-          text-align: left;
-          display: inline-block;
-          width: 164px;
-        }
-        #time {
-          font-family: 'Jost';
-          color: #f7de1f;
-          font-size: 25px;
-          text-align: center;
-          display: inline-block;
-          width: 100%;
-        }
-        .full-screen {
-          display: none;
-        }
+        display: flex;
       }
 
       .full-screen {
-        z-index: 1;
         cursor: pointer;
-        text-align: right;
+        position: fixed;
+        right: 10px;
+        top: 10px;
+      }
+      .timer {
+        position: fixed;
+        left: 33%;
+        top: 33%;
+      }
+
+      #sec {
+        font-family: 'Jost';
+        font-size: 200px;
+        color: #f7de1f;
+      }
+
+      #txt {
+        font-family: 'Jost';
+        font-size: 200px;
+        color: #f7de1f;
+      }
+
+      @media (max-width: 1366px) {
+        .timer {
+          position: fixed;
+          left: 30%;
+          top: 35%;
+        }
+        #sec {
+          font-size: 150px;
+        }
+
+        #txt {
+          font-size: 150px;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .timer {
+          position: fixed;
+          left: 25%;
+          top: 40%;
+        }
+        #sec {
+          font-size: 80px;
+        }
+
+        #txt {
+          font-size: 80px;
+        }
       }
     </style>
   </head>
@@ -82,22 +80,23 @@
         onclick="fullscreen()"
       />
     </div>
-    <div id="subcontainer">
-      <div id="txt"></div>
-      <div id="time"></div>
+
+    <div class="timer">
+      <span id="txt"></span>
+      <span id="sec"></span>
     </div>
+
     <script>
       function startTime() {
         const today = new Date();
-        let h = today.getHours() % 12 || 12;
+        // let h = today.getHours() % 12 || 12;
+        let h = today.getHours();
         let m = today.getMinutes();
         let s = today.getSeconds();
-        let t = today.getHours() < 12 ? '\nAM' : '\nPM';
         m = checkTime(m);
         s = checkTime(s);
-
-        document.getElementById('txt').innerHTML = h + ':' + m + ':' + s;
-        document.getElementById('time').innerHTML = t;
+        document.getElementById('txt').innerHTML = h + ':' + m + ':';
+        document.getElementById('sec').innerHTML = s;
         setTimeout(startTime, 1000);
       }
 
