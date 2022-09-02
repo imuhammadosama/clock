@@ -43,10 +43,24 @@
           top: 40%;
         }
       }
+      .full-screen {
+        z-index: 1;
+        margin-top: 100px;
+        cursor: pointer;
+        text-align: right;
+      }
     </style>
   </head>
 
   <body onload="startTime()">
+    <div class="full-screen">
+      <img
+        src="full-screen.png"
+        id="full-screen"
+        alt=""
+        onclick="fullscreen()"
+      />
+    </div>
     <div class="container">
       <div class="sub-container"><div id="txt"></div></div>
     </div>
@@ -67,6 +81,42 @@
           i = '0' + i;
         }
         return i;
+      }
+
+      function fullscreen() {
+        var isInFullScreen =
+          (document.fullscreenElement && document.fullscreenElement !== null) ||
+          (document.webkitFullscreenElement &&
+            document.webkitFullscreenElement !== null) ||
+          (document.mozFullScreenElement &&
+            document.mozFullScreenElement !== null) ||
+          (document.msFullscreenElement &&
+            document.msFullscreenElement !== null);
+
+        var docElm = document.documentElement;
+        if (!isInFullScreen) {
+          document.getElementById('full-screen').src = 'exit-full-screen.png';
+          if (docElm.requestFullscreen) {
+            docElm.requestFullscreen();
+          } else if (docElm.mozRequestFullScreen) {
+            docElm.mozRequestFullScreen();
+          } else if (docElm.webkitRequestFullScreen) {
+            docElm.webkitRequestFullScreen();
+          } else if (docElm.msRequestFullscreen) {
+            docElm.msRequestFullscreen();
+          }
+        } else {
+          document.getElementById('full-screen').src = 'full-screen.png';
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+          } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+          }
+        }
       }
     </script>
   </body>
