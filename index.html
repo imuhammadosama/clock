@@ -14,61 +14,24 @@
         overflow: hidden;
       }
       #subcontainer {
-        position: fixed;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        height: 100vh;
+        display: flex;
+        align-items: center;
       }
+
       #txt {
         font-family: 'Jost';
-        color: #f7de1f;
-        font-size: 100px;
-        text-align: center;
-        display: inline-block;
-        width: 300px;
+        color: #fffae8;
+        font-size: max(25vw, 30px);
       }
-
       #time {
-        font-family: 'Jost';
-        color: #f7de1f;
-        font-size: 25px;
-        text-align: right;
-        display: inline-block;
-        width: 130px;
+        display: none;
       }
-
-      @media (max-width: 720px) {
-        #subcontainer {
-          position: fixed;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-        #txt {
-          font-family: 'Jost';
-          color: #f7de1f;
-          font-size: 64px;
-          text-align: left;
-          display: inline-block;
-          width: 164px;
-        }
-        #time {
-          font-family: 'Jost';
-          color: #f7de1f;
-          font-size: 25px;
-          text-align: center;
-          display: inline-block;
-          width: 100%;
-        }
-        .full-screen {
-          display: none;
-        }
-      }
-
       .full-screen {
         z-index: 1;
         cursor: pointer;
         text-align: right;
+        position: fixed;
       }
     </style>
   </head>
@@ -89,7 +52,7 @@
     <script>
       function startTime() {
         const today = new Date();
-        let h = today.getHours() % 12 || 12;
+        let h = today.getHours() % 24 || 24;
         let m = today.getMinutes();
         let s = today.getSeconds();
         let t = today.getHours() < 12 ? '\nAM' : '\nPM';
