@@ -50,10 +50,9 @@
       <div id="time"></div>
     </div>
     <script>
-      setTimeout(
-        "document.body.style.background = '#333333'",
-        10000000000000000000000000000000000000000
-      );
+      requestAnimationFrame(function () {
+        document.body.style.background = 'black';
+      });
       function startTime() {
         const today = new Date();
         let h = today.getHours() % 24 || 24;
